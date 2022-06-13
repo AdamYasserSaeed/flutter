@@ -32,6 +32,193 @@ enum ListTileStyle {
   drawer,
 }
 
+<<<<<<< HEAD
+=======
+/// An inherited widget that defines color and style parameters for [ListTile]s
+/// in this widget's subtree.
+///
+/// Values specified here are used for [ListTile] properties that are not given
+/// an explicit non-null value.
+///
+/// The [Drawer] widget specifies a tile theme for its children which sets
+/// [style] to [ListTileStyle.drawer].
+class ListTileTheme extends InheritedTheme {
+  /// Creates a list tile theme that controls the color and style parameters for
+  /// [ListTile]s.
+  const ListTileTheme({
+    Key? key,
+    this.dense = false,
+    this.shape,
+    this.style = ListTileStyle.list,
+    this.selectedColor,
+    this.iconColor,
+    this.textColor,
+    this.contentPadding,
+    this.tileColor,
+    this.selectedTileColor,
+    this.enableFeedback,
+    this.horizontalTitleGap,
+    this.minVerticalPadding,
+    this.minLeadingWidth,
+    required Widget child,
+  }) : super(key: key, child: child);
+
+  /// Creates a list tile theme that controls the color and style parameters for
+  /// [ListTile]s, and merges in the current list tile theme, if any.
+  ///
+  /// The [child] argument must not be null.
+  static Widget merge({
+    Key? key,
+    bool? dense,
+    ShapeBorder? shape,
+    ListTileStyle? style,
+    Color? selectedColor,
+    Color? iconColor,
+    Color? textColor,
+    EdgeInsetsGeometry? contentPadding,
+    Color? tileColor,
+    Color? selectedTileColor,
+    bool? enableFeedback,
+    double? horizontalTitleGap,
+    double? minVerticalPadding,
+    double? minLeadingWidth,
+    required Widget child,
+  }) {
+    assert(child != null);
+    return Builder(
+      builder: (BuildContext context) {
+        final ListTileTheme parent = ListTileTheme.of(context);
+        return ListTileTheme(
+          key: key,
+          dense: dense ?? parent.dense,
+          shape: shape ?? parent.shape,
+          style: style ?? parent.style,
+          selectedColor: selectedColor ?? parent.selectedColor,
+          iconColor: iconColor ?? parent.iconColor,
+          textColor: textColor ?? parent.textColor,
+          contentPadding: contentPadding ?? parent.contentPadding,
+          tileColor: tileColor ?? parent.tileColor,
+          selectedTileColor: selectedTileColor ?? parent.selectedTileColor,
+          enableFeedback: enableFeedback ?? parent.enableFeedback,
+          horizontalTitleGap: horizontalTitleGap ?? parent.horizontalTitleGap,
+          minVerticalPadding: minVerticalPadding ?? parent.minVerticalPadding,
+          minLeadingWidth: minLeadingWidth ?? parent.minLeadingWidth,
+          child: child,
+        );
+      },
+    );
+  }
+
+  /// If true then [ListTile]s will have the vertically dense layout.
+  final bool dense;
+
+  /// {@template flutter.material.ListTileTheme.shape}
+  /// If specified, [shape] defines the [ListTile]'s shape.
+  /// {@endtemplate}
+  final ShapeBorder? shape;
+
+  /// If specified, [style] defines the font used for [ListTile] titles.
+  final ListTileStyle style;
+
+  /// If specified, the color used for icons and text when a [ListTile] is selected.
+  final Color? selectedColor;
+
+  /// If specified, the icon color used for enabled [ListTile]s that are not selected.
+  final Color? iconColor;
+
+  /// If specified, the text color used for enabled [ListTile]s that are not selected.
+  final Color? textColor;
+
+  /// The tile's internal padding.
+  ///
+  /// Insets a [ListTile]'s contents: its [ListTile.leading], [ListTile.title],
+  /// [ListTile.subtitle], and [ListTile.trailing] widgets.
+  final EdgeInsetsGeometry? contentPadding;
+
+  /// If specified, defines the background color for `ListTile` when
+  /// [ListTile.selected] is false.
+  ///
+  /// If [ListTile.tileColor] is provided, [tileColor] is ignored.
+  final Color? tileColor;
+
+  /// If specified, defines the background color for `ListTile` when
+  /// [ListTile.selected] is true.
+  ///
+  /// If [ListTile.selectedTileColor] is provided, [selectedTileColor] is ignored.
+  final Color? selectedTileColor;
+
+  /// The horizontal gap between the titles and the leading/trailing widgets.
+  ///
+  /// If specified, overrides the default value of [ListTile.horizontalTitleGap].
+  final double? horizontalTitleGap;
+
+  /// The minimum padding on the top and bottom of the title and subtitle widgets.
+  ///
+  /// If specified, overrides the default value of [ListTile.minVerticalPadding].
+  final double? minVerticalPadding;
+
+  /// The minimum width allocated for the [ListTile.leading] widget.
+  ///
+  /// If specified, overrides the default value of [ListTile.minLeadingWidth].
+  final double? minLeadingWidth;
+
+  /// If specified, defines the feedback property for `ListTile`.
+  ///
+  /// If [ListTile.enableFeedback] is provided, [enableFeedback] is ignored.
+  final bool? enableFeedback;
+
+  /// The closest instance of this class that encloses the given context.
+  ///
+  /// Typical usage is as follows:
+  ///
+  /// ```dart
+  /// ListTileTheme theme = ListTileTheme.of(context);
+  /// ```
+  static ListTileTheme of(BuildContext context) {
+    final ListTileTheme? result =
+        context.dependOnInheritedWidgetOfExactType<ListTileTheme>();
+    return result ?? const ListTileTheme(child: SizedBox());
+  }
+
+  @override
+  Widget wrap(BuildContext context, Widget child) {
+    return ListTileTheme(
+      dense: dense,
+      shape: shape,
+      style: style,
+      selectedColor: selectedColor,
+      iconColor: iconColor,
+      textColor: textColor,
+      contentPadding: contentPadding,
+      tileColor: tileColor,
+      selectedTileColor: selectedTileColor,
+      enableFeedback: enableFeedback,
+      horizontalTitleGap: horizontalTitleGap,
+      minVerticalPadding: minVerticalPadding,
+      minLeadingWidth: minLeadingWidth,
+      child: child,
+    );
+  }
+
+  @override
+  bool updateShouldNotify(ListTileTheme oldWidget) {
+    return dense != oldWidget.dense ||
+        shape != oldWidget.shape ||
+        style != oldWidget.style ||
+        selectedColor != oldWidget.selectedColor ||
+        iconColor != oldWidget.iconColor ||
+        textColor != oldWidget.textColor ||
+        contentPadding != oldWidget.contentPadding ||
+        tileColor != oldWidget.tileColor ||
+        selectedTileColor != oldWidget.selectedTileColor ||
+        enableFeedback != oldWidget.enableFeedback ||
+        horizontalTitleGap != oldWidget.horizontalTitleGap ||
+        minVerticalPadding != oldWidget.minVerticalPadding ||
+        minLeadingWidth != oldWidget.minLeadingWidth;
+  }
+}
+
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
 /// Where to place the control in widgets that use [ListTile] to position a
 /// control next to a label.
 ///
@@ -291,7 +478,7 @@ enum ListTileControlAffinity {
 ///    that combine [ListTile] with other controls.
 ///  * <https://material.io/design/components/lists.html>
 ///  * Cookbook: [Use lists](https://flutter.dev/docs/cookbook/lists/basic-list)
-///  * Cookbook: [Implement swipe to dismiss](https://flutter.dev/docs/cookbook/gestures/dismissible)
+///  *f Cookbook: [Implement swipe to dismiss](https://flutter.dev/docs/cookbook/gestures/dismissible)
 class ListTile extends StatelessWidget {
   /// Creates a list tile.
   ///
@@ -328,12 +515,12 @@ class ListTile extends StatelessWidget {
     this.horizontalTitleGap,
     this.minVerticalPadding,
     this.minLeadingWidth,
-  }) : assert(isThreeLine != null),
-       assert(enabled != null),
-       assert(selected != null),
-       assert(autofocus != null),
-       assert(!isThreeLine || subtitle != null),
-       super(key: key);
+  })  : assert(isThreeLine != null),
+        assert(enabled != null),
+        assert(selected != null),
+        assert(autofocus != null),
+        assert(!isThreeLine || subtitle != null),
+        super(key: key);
 
   /// A widget to display before the title.
   ///
@@ -400,7 +587,7 @@ class ListTile extends StatelessWidget {
   final bool? dense;
 
   /// Defines how compact the list tile's layout will be.
-  ///
+  /// MR.Adam
   /// {@macro flutter.material.themedata.visualDensity}
   ///
   /// See also:
@@ -588,14 +775,34 @@ class ListTile extends StatelessWidget {
   /// See also:
   ///
   ///  * [Divider], which you can use to obtain this effect manually.
+<<<<<<< HEAD
   static Iterable<Widget> divideTiles({ BuildContext? context, required Iterable<Widget> tiles, Color? color }) {
+=======
+  static Iterable<Widget> divideTiles(
+      {BuildContext? context,
+      required Iterable<Widget> tiles,
+      Color? color}) sync* {
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
     assert(tiles != null);
     assert(color != null || context != null);
     tiles = tiles.toList();
 
+<<<<<<< HEAD
     if (tiles.isEmpty || tiles.length == 1) {
       return tiles;
     }
+=======
+    final Iterator<Widget> iterator = tiles.iterator;
+    final bool hasNext = iterator.moveNext();
+
+    if (!hasNext) return;
+
+    final Decoration decoration = BoxDecoration(
+      border: Border(
+        bottom: Divider.createBorderSide(context, color: color),
+      ),
+    );
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
 
     Widget wrapTile(Widget tile) {
       return DecoratedBox(
@@ -608,6 +815,7 @@ class ListTile extends StatelessWidget {
         child: tile,
       );
     }
+<<<<<<< HEAD
 
     return <Widget>[
       ...tiles.take(tiles.length - 1).map(wrapTile),
@@ -618,14 +826,25 @@ class ListTile extends StatelessWidget {
   Color? _iconColor(ThemeData theme, ListTileThemeData tileTheme) {
     if (!enabled)
       return theme.disabledColor;
+=======
+    if (hasNext) yield tile;
+  }
+
+  Color? _iconColor(ThemeData theme, ListTileTheme? tileTheme) {
+    if (!enabled) return theme.disabledColor;
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
 
     if (selected) {
       return selectedColor ?? tileTheme.selectedColor ?? theme.listTileTheme.selectedColor ?? theme.colorScheme.primary;
     }
 
+<<<<<<< HEAD
     final Color? color = iconColor ?? tileTheme.iconColor ?? theme.listTileTheme.iconColor;
     if (color != null)
       return color;
+=======
+    if (!selected && tileTheme?.iconColor != null) return tileTheme!.iconColor;
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
 
     switch (theme.brightness) {
       case Brightness.light:
@@ -633,6 +852,7 @@ class ListTile extends StatelessWidget {
         // tiles is Colors.black45 rather than colorScheme.onSurface.withAlpha(0x73).
         return Colors.black45;
       case Brightness.dark:
+<<<<<<< HEAD
         return null; // null - use current icon theme color
     }
   }
@@ -644,6 +864,24 @@ class ListTile extends StatelessWidget {
     if (selected) {
       return selectedColor ?? tileTheme.selectedColor ?? theme.listTileTheme.selectedColor ?? theme.colorScheme.primary;
     }
+=======
+        return selected
+            ? theme.colorScheme.primary
+            : null; // null - use current icon theme color
+    }
+  }
+
+  Color? _textColor(
+      ThemeData theme, ListTileTheme? tileTheme, Color? defaultColor) {
+    if (!enabled) return theme.disabledColor;
+
+    if (selected && tileTheme?.selectedColor != null)
+      return tileTheme!.selectedColor;
+
+    if (!selected && tileTheme?.textColor != null) return tileTheme!.textColor;
+
+    if (selected) return theme.colorScheme.primary;
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
 
     return textColor ?? tileTheme.textColor ?? theme.listTileTheme.textColor ?? defaultColor;
   }
@@ -662,6 +900,7 @@ class ListTile extends StatelessWidget {
         textStyle = theme.textTheme.subtitle1!;
         break;
     }
+<<<<<<< HEAD
     final Color? color = _textColor(theme, tileTheme, textStyle.color);
     return _isDenseLayout(theme, tileTheme)
       ? textStyle.copyWith(fontSize: 13.0, color: color)
@@ -687,6 +926,43 @@ class ListTile extends StatelessWidget {
       ? selectedTileColor ?? tileTheme.selectedTileColor ?? theme.listTileTheme.selectedTileColor
       : tileColor ?? tileTheme.tileColor ?? theme.listTileTheme.tileColor;
     return color ?? Colors.transparent;
+=======
+    final Color? color = _textColor(theme, tileTheme, style.color);
+    return _isDenseLayout(tileTheme)
+        ? style.copyWith(fontSize: 13.0, color: color)
+        : style.copyWith(color: color);
+  }
+
+  TextStyle _subtitleTextStyle(ThemeData theme, ListTileTheme? tileTheme) {
+    final TextStyle style = theme.textTheme.bodyText2!;
+    final Color? color =
+        _textColor(theme, tileTheme, theme.textTheme.caption!.color);
+    return _isDenseLayout(tileTheme)
+        ? style.copyWith(color: color, fontSize: 12.0)
+        : style.copyWith(color: color);
+  }
+
+  TextStyle _trailingAndLeadingTextStyle(
+      ThemeData theme, ListTileTheme? tileTheme) {
+    final TextStyle style = theme.textTheme.bodyText2!;
+    final Color? color = _textColor(theme, tileTheme, style.color);
+    return style.copyWith(color: color);
+  }
+
+  Color _tileBackgroundColor(ListTileTheme? tileTheme) {
+    if (!selected) {
+      if (tileColor != null) return tileColor!;
+      if (tileTheme?.tileColor != null) return tileTheme!.tileColor!;
+    }
+
+    if (selected) {
+      if (selectedTileColor != null) return selectedTileColor!;
+      if (tileTheme?.selectedTileColor != null)
+        return tileTheme!.selectedTileColor!;
+    }
+
+    return Colors.transparent;
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
   }
 
   @override
@@ -698,7 +974,13 @@ class ListTile extends StatelessWidget {
 
     TextStyle? leadingAndTrailingTextStyle;
     if (leading != null || trailing != null) {
+<<<<<<< HEAD
       leadingAndTrailingTextStyle = _trailingAndLeadingTextStyle(theme, tileTheme);
+=======
+      iconThemeData = IconThemeData(color: _iconColor(theme, tileTheme));
+      leadingAndTrailingTextStyle =
+          _trailingAndLeadingTextStyle(theme, tileTheme);
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
     }
 
     Widget? leadingIcon;
@@ -737,6 +1019,7 @@ class ListTile extends StatelessWidget {
       );
     }
 
+<<<<<<< HEAD
     const EdgeInsets defaultContentPadding = EdgeInsets.symmetric(horizontal: 16.0);
     final TextDirection textDirection = Directionality.of(context);
     final EdgeInsets resolvedContentPadding = contentPadding?.resolve(textDirection)
@@ -751,6 +1034,25 @@ class ListTile extends StatelessWidget {
     final MouseCursor effectiveMouseCursor = MaterialStateProperty.resolveAs<MouseCursor?>(mouseCursor, states)
       ?? tileTheme.mouseCursor?.resolve(states)
       ?? MaterialStateMouseCursor.clickable.resolve(states);
+=======
+    const EdgeInsets _defaultContentPadding =
+        EdgeInsets.symmetric(horizontal: 16.0);
+    final TextDirection textDirection = Directionality.of(context);
+    final EdgeInsets resolvedContentPadding =
+        contentPadding?.resolve(textDirection) ??
+            tileTheme.contentPadding?.resolve(textDirection) ??
+            _defaultContentPadding;
+
+    final MouseCursor resolvedMouseCursor =
+        MaterialStateProperty.resolveAs<MouseCursor>(
+      mouseCursor ?? MaterialStateMouseCursor.clickable,
+      <MaterialState>{
+        if (!enabled || (onTap == null && onLongPress == null))
+          MaterialState.disabled,
+        if (selected) MaterialState.selected,
+      },
+    );
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
 
     return InkWell(
       customBorder: shape ?? tileTheme.shape,
@@ -775,6 +1077,7 @@ class ListTile extends StatelessWidget {
             top: false,
             bottom: false,
             minimum: resolvedContentPadding,
+<<<<<<< HEAD
             child: IconTheme.merge(
               data: iconThemeData,
               child: _ListTile(
@@ -792,6 +1095,25 @@ class ListTile extends StatelessWidget {
                 minVerticalPadding: minVerticalPadding ?? tileTheme.minVerticalPadding ?? 4,
                 minLeadingWidth: minLeadingWidth ?? tileTheme.minLeadingWidth ?? 40,
               ),
+=======
+            child: _ListTile(
+              leading: leadingIcon,
+              title: titleText,
+              subtitle: subtitleText,
+              trailing: trailingIcon,
+              isDense: _isDenseLayout(tileTheme),
+              visualDensity: visualDensity ?? theme.visualDensity,
+              isThreeLine: isThreeLine,
+              textDirection: textDirection,
+              titleBaselineType: titleStyle.textBaseline!,
+              subtitleBaselineType: subtitleStyle?.textBaseline,
+              horizontalTitleGap:
+                  horizontalTitleGap ?? tileTheme.horizontalTitleGap ?? 16,
+              minVerticalPadding:
+                  minVerticalPadding ?? tileTheme.minVerticalPadding ?? 4,
+              minLeadingWidth:
+                  minLeadingWidth ?? tileTheme.minLeadingWidth ?? 40,
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
             ),
           ),
         ),
@@ -824,15 +1146,15 @@ class _ListTile extends RenderObjectWidget with SlottedMultiChildRenderObjectWid
     required this.minVerticalPadding,
     required this.minLeadingWidth,
     this.subtitleBaselineType,
-  }) : assert(isThreeLine != null),
-       assert(isDense != null),
-       assert(visualDensity != null),
-       assert(textDirection != null),
-       assert(titleBaselineType != null),
-       assert(horizontalTitleGap != null),
-       assert(minVerticalPadding != null),
-       assert(minLeadingWidth != null),
-       super(key: key);
+  })  : assert(isThreeLine != null),
+        assert(isDense != null),
+        assert(visualDensity != null),
+        assert(textDirection != null),
+        assert(titleBaselineType != null),
+        assert(horizontalTitleGap != null),
+        assert(minVerticalPadding != null),
+        assert(minLeadingWidth != null),
+        super(key: key);
 
   final Widget? leading;
   final Widget title;
@@ -895,7 +1217,116 @@ class _ListTile extends RenderObjectWidget with SlottedMultiChildRenderObjectWid
   }
 }
 
+<<<<<<< HEAD
 class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_ListTileSlot> {
+=======
+class _ListTileElement extends RenderObjectElement {
+  _ListTileElement(_ListTile widget) : super(widget);
+
+  final Map<_ListTileSlot, Element> slotToChild = <_ListTileSlot, Element>{};
+
+  @override
+  _ListTile get widget => super.widget as _ListTile;
+
+  @override
+  _RenderListTile get renderObject => super.renderObject as _RenderListTile;
+
+  @override
+  void visitChildren(ElementVisitor visitor) {
+    slotToChild.values.forEach(visitor);
+  }
+
+  @override
+  void forgetChild(Element child) {
+    assert(slotToChild.containsValue(child));
+    assert(child.slot is _ListTileSlot);
+    assert(slotToChild.containsKey(child.slot));
+    slotToChild.remove(child.slot);
+    super.forgetChild(child);
+  }
+
+  void _mountChild(Widget? widget, _ListTileSlot slot) {
+    final Element? oldChild = slotToChild[slot];
+    final Element? newChild = updateChild(oldChild, widget, slot);
+    if (oldChild != null) {
+      slotToChild.remove(slot);
+    }
+    if (newChild != null) {
+      slotToChild[slot] = newChild;
+    }
+  }
+
+  @override
+  void mount(Element? parent, Object? newSlot) {
+    super.mount(parent, newSlot);
+    _mountChild(widget.leading, _ListTileSlot.leading);
+    _mountChild(widget.title, _ListTileSlot.title);
+    _mountChild(widget.subtitle, _ListTileSlot.subtitle);
+    _mountChild(widget.trailing, _ListTileSlot.trailing);
+  }
+
+  void _updateChild(Widget? widget, _ListTileSlot slot) {
+    final Element? oldChild = slotToChild[slot];
+    final Element? newChild = updateChild(oldChild, widget, slot);
+    if (oldChild != null) {
+      slotToChild.remove(slot);
+    }
+    if (newChild != null) {
+      slotToChild[slot] = newChild;
+    }
+  }
+
+  @override
+  void update(_ListTile newWidget) {
+    super.update(newWidget);
+    assert(widget == newWidget);
+    _updateChild(widget.leading, _ListTileSlot.leading);
+    _updateChild(widget.title, _ListTileSlot.title);
+    _updateChild(widget.subtitle, _ListTileSlot.subtitle);
+    _updateChild(widget.trailing, _ListTileSlot.trailing);
+  }
+
+  void _updateRenderObject(RenderBox? child, _ListTileSlot slot) {
+    switch (slot) {
+      case _ListTileSlot.leading:
+        renderObject.leading = child;
+        break;
+      case _ListTileSlot.title:
+        renderObject.title = child;
+        break;
+      case _ListTileSlot.subtitle:
+        renderObject.subtitle = child;
+        break;
+      case _ListTileSlot.trailing:
+        renderObject.trailing = child;
+        break;
+    }
+  }
+
+  @override
+  void insertRenderObjectChild(RenderObject child, _ListTileSlot slot) {
+    assert(child is RenderBox);
+    _updateRenderObject(child as RenderBox, slot);
+    assert(renderObject.children.keys.contains(slot));
+  }
+
+  @override
+  void removeRenderObjectChild(RenderObject child, _ListTileSlot slot) {
+    assert(child is RenderBox);
+    assert(renderObject.children[slot] == child);
+    _updateRenderObject(null, slot);
+    assert(!renderObject.children.keys.contains(slot));
+  }
+
+  @override
+  void moveRenderObjectChild(
+      RenderObject child, Object? oldSlot, Object? newSlot) {
+    assert(false, 'not reachable');
+  }
+}
+
+class _RenderListTile extends RenderBox {
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
   _RenderListTile({
     required bool isDense,
     required VisualDensity visualDensity,
@@ -906,24 +1337,25 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
     required double horizontalTitleGap,
     required double minVerticalPadding,
     required double minLeadingWidth,
-  }) : assert(isDense != null),
-       assert(visualDensity != null),
-       assert(isThreeLine != null),
-       assert(textDirection != null),
-       assert(titleBaselineType != null),
-       assert(horizontalTitleGap != null),
-       assert(minVerticalPadding != null),
-       assert(minLeadingWidth != null),
-       _isDense = isDense,
-       _visualDensity = visualDensity,
-       _isThreeLine = isThreeLine,
-       _textDirection = textDirection,
-       _titleBaselineType = titleBaselineType,
-       _subtitleBaselineType = subtitleBaselineType,
-       _horizontalTitleGap = horizontalTitleGap,
-       _minVerticalPadding = minVerticalPadding,
-       _minLeadingWidth = minLeadingWidth;
+  })  : assert(isDense != null),
+        assert(visualDensity != null),
+        assert(isThreeLine != null),
+        assert(textDirection != null),
+        assert(titleBaselineType != null),
+        assert(horizontalTitleGap != null),
+        assert(minVerticalPadding != null),
+        assert(minLeadingWidth != null),
+        _isDense = isDense,
+        _visualDensity = visualDensity,
+        _isThreeLine = isThreeLine,
+        _textDirection = textDirection,
+        _titleBaselineType = titleBaselineType,
+        _subtitleBaselineType = subtitleBaselineType,
+        _horizontalTitleGap = horizontalTitleGap,
+        _minVerticalPadding = minVerticalPadding,
+        _minLeadingWidth = minLeadingWidth;
 
+<<<<<<< HEAD
   RenderBox? get leading => childForSlot(_ListTileSlot.leading);
   RenderBox? get title => childForSlot(_ListTileSlot.title);
   RenderBox? get subtitle => childForSlot(_ListTileSlot.subtitle);
@@ -942,14 +1374,60 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
       if (trailing != null)
         trailing!,
     ];
+=======
+  final Map<_ListTileSlot, RenderBox> children = <_ListTileSlot, RenderBox>{};
+
+  RenderBox? _updateChild(
+      RenderBox? oldChild, RenderBox? newChild, _ListTileSlot slot) {
+    if (oldChild != null) {
+      dropChild(oldChild);
+      children.remove(slot);
+    }
+    if (newChild != null) {
+      children[slot] = newChild;
+      adoptChild(newChild);
+    }
+    return newChild;
+  }
+
+  RenderBox? _leading;
+  RenderBox? get leading => _leading;
+  set leading(RenderBox? value) {
+    _leading = _updateChild(_leading, value, _ListTileSlot.leading);
+  }
+
+  RenderBox? _title;
+  RenderBox? get title => _title;
+  set title(RenderBox? value) {
+    _title = _updateChild(_title, value, _ListTileSlot.title);
+  }
+
+  RenderBox? _subtitle;
+  RenderBox? get subtitle => _subtitle;
+  set subtitle(RenderBox? value) {
+    _subtitle = _updateChild(_subtitle, value, _ListTileSlot.subtitle);
+  }
+
+  RenderBox? _trailing;
+  RenderBox? get trailing => _trailing;
+  set trailing(RenderBox? value) {
+    _trailing = _updateChild(_trailing, value, _ListTileSlot.trailing);
+  }
+
+  // The returned list is ordered for hit testing.
+  Iterable<RenderBox> get _children sync* {
+    if (leading != null) yield leading!;
+    if (title != null) yield title!;
+    if (subtitle != null) yield subtitle!;
+    if (trailing != null) yield trailing!;
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
   }
 
   bool get isDense => _isDense;
   bool _isDense;
   set isDense(bool value) {
     assert(value != null);
-    if (_isDense == value)
-      return;
+    if (_isDense == value) return;
     _isDense = value;
     markNeedsLayout();
   }
@@ -958,8 +1436,7 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
   VisualDensity _visualDensity;
   set visualDensity(VisualDensity value) {
     assert(value != null);
-    if (_visualDensity == value)
-      return;
+    if (_visualDensity == value) return;
     _visualDensity = value;
     markNeedsLayout();
   }
@@ -968,8 +1445,7 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
   bool _isThreeLine;
   set isThreeLine(bool value) {
     assert(value != null);
-    if (_isThreeLine == value)
-      return;
+    if (_isThreeLine == value) return;
     _isThreeLine = value;
     markNeedsLayout();
   }
@@ -978,8 +1454,7 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
   TextDirection _textDirection;
   set textDirection(TextDirection value) {
     assert(value != null);
-    if (_textDirection == value)
-      return;
+    if (_textDirection == value) return;
     _textDirection = value;
     markNeedsLayout();
   }
@@ -988,8 +1463,7 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
   TextBaseline _titleBaselineType;
   set titleBaselineType(TextBaseline value) {
     assert(value != null);
-    if (_titleBaselineType == value)
-      return;
+    if (_titleBaselineType == value) return;
     _titleBaselineType = value;
     markNeedsLayout();
   }
@@ -997,20 +1471,19 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
   TextBaseline? get subtitleBaselineType => _subtitleBaselineType;
   TextBaseline? _subtitleBaselineType;
   set subtitleBaselineType(TextBaseline? value) {
-    if (_subtitleBaselineType == value)
-      return;
+    if (_subtitleBaselineType == value) return;
     _subtitleBaselineType = value;
     markNeedsLayout();
   }
 
   double get horizontalTitleGap => _horizontalTitleGap;
   double _horizontalTitleGap;
-  double get _effectiveHorizontalTitleGap => _horizontalTitleGap + visualDensity.horizontal * 2.0;
+  double get _effectiveHorizontalTitleGap =>
+      _horizontalTitleGap + visualDensity.horizontal * 2.0;
 
   set horizontalTitleGap(double value) {
     assert(value != null);
-    if (_horizontalTitleGap == value)
-      return;
+    if (_horizontalTitleGap == value) return;
     _horizontalTitleGap = value;
     markNeedsLayout();
   }
@@ -1020,8 +1493,7 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
 
   set minVerticalPadding(double value) {
     assert(value != null);
-    if (_minVerticalPadding == value)
-      return;
+    if (_minVerticalPadding == value) return;
     _minVerticalPadding = value;
     markNeedsLayout();
   }
@@ -1031,13 +1503,51 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
 
   set minLeadingWidth(double value) {
     assert(value != null);
-    if (_minLeadingWidth == value)
-      return;
+    if (_minLeadingWidth == value) return;
     _minLeadingWidth = value;
     markNeedsLayout();
   }
 
   @override
+<<<<<<< HEAD
+=======
+  void attach(PipelineOwner owner) {
+    super.attach(owner);
+    for (final RenderBox child in _children) child.attach(owner);
+  }
+
+  @override
+  void detach() {
+    super.detach();
+    for (final RenderBox child in _children) child.detach();
+  }
+
+  @override
+  void redepthChildren() {
+    _children.forEach(redepthChild);
+  }
+
+  @override
+  void visitChildren(RenderObjectVisitor visitor) {
+    _children.forEach(visitor);
+  }
+
+  @override
+  List<DiagnosticsNode> debugDescribeChildren() {
+    final List<DiagnosticsNode> value = <DiagnosticsNode>[];
+    void add(RenderBox? child, String name) {
+      if (child != null) value.add(child.toDiagnosticsNode(name: name));
+    }
+
+    add(leading, 'leading');
+    add(title, 'title');
+    add(subtitle, 'subtitle');
+    add(trailing, 'trailing');
+    return value;
+  }
+
+  @override
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
   bool get sizedByParent => false;
 
   static double _minWidth(RenderBox? box, double height) {
@@ -1051,21 +1561,23 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
   @override
   double computeMinIntrinsicWidth(double height) {
     final double leadingWidth = leading != null
-      ? math.max(leading!.getMinIntrinsicWidth(height), _minLeadingWidth) + _effectiveHorizontalTitleGap
-      : 0.0;
-    return leadingWidth
-      + math.max(_minWidth(title, height), _minWidth(subtitle, height))
-      + _maxWidth(trailing, height);
+        ? math.max(leading!.getMinIntrinsicWidth(height), _minLeadingWidth) +
+            _effectiveHorizontalTitleGap
+        : 0.0;
+    return leadingWidth +
+        math.max(_minWidth(title, height), _minWidth(subtitle, height)) +
+        _maxWidth(trailing, height);
   }
 
   @override
   double computeMaxIntrinsicWidth(double height) {
     final double leadingWidth = leading != null
-      ? math.max(leading!.getMaxIntrinsicWidth(height), _minLeadingWidth) + _effectiveHorizontalTitleGap
-      : 0.0;
-    return leadingWidth
-      + math.max(_maxWidth(title, height), _maxWidth(subtitle, height))
-      + _maxWidth(trailing, height);
+        ? math.max(leading!.getMaxIntrinsicWidth(height), _minLeadingWidth) +
+            _effectiveHorizontalTitleGap
+        : 0.0;
+    return leadingWidth +
+        math.max(_maxWidth(title, height), _maxWidth(subtitle, height)) +
+        _maxWidth(trailing, height);
   }
 
   double get _defaultTileHeight {
@@ -1074,10 +1586,8 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
     final bool isOneLine = !isThreeLine && !hasSubtitle;
 
     final Offset baseDensity = visualDensity.baseSizeAdjustment;
-    if (isOneLine)
-      return (isDense ? 48.0 : 56.0) + baseDensity.dy;
-    if (isTwoLine)
-      return (isDense ? 64.0 : 72.0) + baseDensity.dy;
+    if (isOneLine) return (isDense ? 48.0 : 56.0) + baseDensity.dy;
+    if (isTwoLine) return (isDense ? 64.0 : 72.0) + baseDensity.dy;
     return (isDense ? 76.0 : 88.0) + baseDensity.dy;
   }
 
@@ -1085,7 +1595,8 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
   double computeMinIntrinsicHeight(double width) {
     return math.max(
       _defaultTileHeight,
-      title!.getMinIntrinsicHeight(width) + (subtitle?.getMinIntrinsicHeight(width) ?? 0.0),
+      title!.getMinIntrinsicHeight(width) +
+          (subtitle?.getMinIntrinsicHeight(width) ?? 0.0),
     );
   }
 
@@ -1106,8 +1617,7 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
   }
 
   static Size _layoutBox(RenderBox? box, BoxConstraints constraints) {
-    if (box == null)
-      return Size.zero;
+    if (box == null) return Size.zero;
     box.layout(constraints, parentUsesSize: true);
     return box.size;
   }
@@ -1120,7 +1630,8 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
   @override
   Size computeDryLayout(BoxConstraints constraints) {
     assert(debugCannotComputeDryLayout(
-      reason: 'Layout requires baseline metrics, which are only available after a full layout.',
+      reason:
+          'Layout requires baseline metrics, which are only available after a full layout.',
     ));
     return Size.zero;
   }
@@ -1146,7 +1657,8 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
       maxHeight: (isDense ? 48.0 : 56.0) + densityAdjustment.dy,
     );
     final BoxConstraints looseConstraints = constraints.loosen();
-    final BoxConstraints iconConstraints = looseConstraints.enforce(maxIconHeightConstraint);
+    final BoxConstraints iconConstraints =
+        looseConstraints.enforce(maxIconHeightConstraint);
 
     final double tileWidth = looseConstraints.maxWidth;
     final Size leadingSize = _layoutBox(leading, iconConstraints);
@@ -1165,8 +1677,9 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
     );
 
     final double titleStart = hasLeading
-      ? math.max(_minLeadingWidth, leadingSize.width) + _effectiveHorizontalTitleGap
-      : 0.0;
+        ? math.max(_minLeadingWidth, leadingSize.width) +
+            _effectiveHorizontalTitleGap
+        : 0.0;
     final double adjustedTrailingWidth = hasTrailing
         ? math.max(trailingSize.width + _effectiveHorizontalTitleGap, 32.0)
         : 0.0;
@@ -1194,12 +1707,15 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
     double titleY;
     double? subtitleY;
     if (!hasSubtitle) {
-      tileHeight = math.max(defaultTileHeight, titleSize.height + 2.0 * _minVerticalPadding);
+      tileHeight = math.max(
+          defaultTileHeight, titleSize.height + 2.0 * _minVerticalPadding);
       titleY = (tileHeight - titleSize.height) / 2.0;
     } else {
       assert(subtitleBaselineType != null);
       titleY = titleBaseline! - _boxBaseline(title!, titleBaselineType)!;
-      subtitleY = subtitleBaseline! - _boxBaseline(subtitle!, subtitleBaselineType!)! + visualDensity.vertical * 2.0;
+      subtitleY = subtitleBaseline! -
+          _boxBaseline(subtitle!, subtitleBaselineType!)! +
+          visualDensity.vertical * 2.0;
       tileHeight = defaultTileHeight;
 
       // If the title and subtitle overlap, move the title upwards by half
@@ -1215,8 +1731,10 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
       // and subtitle are arranged in a column, tileHeight = column height plus
       // _minVerticalPadding on top and bottom.
       if (titleY < _minVerticalPadding ||
-          (subtitleY + subtitleSize.height + _minVerticalPadding) > tileHeight) {
-        tileHeight = titleSize.height + subtitleSize.height + 2.0 * _minVerticalPadding;
+          (subtitleY + subtitleSize.height + _minVerticalPadding) >
+              tileHeight) {
+        tileHeight =
+            titleSize.height + subtitleSize.height + 2.0 * _minVerticalPadding;
         titleY = _minVerticalPadding;
         subtitleY = titleSize.height + _minVerticalPadding;
       }
@@ -1242,26 +1760,28 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
     }
 
     switch (textDirection) {
-      case TextDirection.rtl: {
-        if (hasLeading)
-          _positionBox(leading!, Offset(tileWidth - leadingSize.width, leadingY));
-        _positionBox(title!, Offset(adjustedTrailingWidth, titleY));
-        if (hasSubtitle)
-          _positionBox(subtitle!, Offset(adjustedTrailingWidth, subtitleY!));
-        if (hasTrailing)
-          _positionBox(trailing!, Offset(0.0, trailingY));
-        break;
-      }
-      case TextDirection.ltr: {
-        if (hasLeading)
-          _positionBox(leading!, Offset(0.0, leadingY));
-        _positionBox(title!, Offset(titleStart, titleY));
-        if (hasSubtitle)
-          _positionBox(subtitle!, Offset(titleStart, subtitleY!));
-        if (hasTrailing)
-          _positionBox(trailing!, Offset(tileWidth - trailingSize.width, trailingY));
-        break;
-      }
+      case TextDirection.rtl:
+        {
+          if (hasLeading)
+            _positionBox(
+                leading!, Offset(tileWidth - leadingSize.width, leadingY));
+          _positionBox(title!, Offset(adjustedTrailingWidth, titleY));
+          if (hasSubtitle)
+            _positionBox(subtitle!, Offset(adjustedTrailingWidth, subtitleY!));
+          if (hasTrailing) _positionBox(trailing!, Offset(0.0, trailingY));
+          break;
+        }
+      case TextDirection.ltr:
+        {
+          if (hasLeading) _positionBox(leading!, Offset(0.0, leadingY));
+          _positionBox(title!, Offset(titleStart, titleY));
+          if (hasSubtitle)
+            _positionBox(subtitle!, Offset(titleStart, subtitleY!));
+          if (hasTrailing)
+            _positionBox(
+                trailing!, Offset(tileWidth - trailingSize.width, trailingY));
+          break;
+        }
     }
 
     size = constraints.constrain(Size(tileWidth, tileHeight));
@@ -1277,6 +1797,7 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
         context.paintChild(child, parentData.offset + offset);
       }
     }
+
     doPaint(leading);
     doPaint(title);
     doPaint(subtitle);
@@ -1287,7 +1808,7 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
   bool hitTestSelf(Offset position) => true;
 
   @override
-  bool hitTestChildren(BoxHitTestResult result, { required Offset position }) {
+  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) {
     assert(position != null);
     for (final RenderBox child in children) {
       final BoxParentData parentData = child.parentData! as BoxParentData;
@@ -1299,8 +1820,7 @@ class _RenderListTile extends RenderBox with SlottedContainerRenderObjectMixin<_
           return child.hitTest(result, position: transformed);
         },
       );
-      if (isHit)
-        return true;
+      if (isHit) return true;
     }
     return false;
   }

@@ -147,7 +147,11 @@ class UserMessages {
   String xcodeLocation(String location) => 'Xcode at $location';
 
   String xcodeOutdated(String requiredVersion) =>
+<<<<<<< HEAD
       'Flutter requires Xcode $requiredVersion or higher.\n'
+=======
+      'Flutter requires a minimum Xcode version of $requiredVersion.\n'
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
       'Download the latest version or update via the Mac App Store.';
 
   String xcodeRecommended(String recommendedVersion) =>

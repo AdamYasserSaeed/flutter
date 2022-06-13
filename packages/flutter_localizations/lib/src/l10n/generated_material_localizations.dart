@@ -31994,7 +31994,12 @@ class MaterialLocalizationRo extends GlobalMaterialLocalizations {
   String get dateRangeEndLabel => 'Data de încheiere';
 
   @override
+<<<<<<< HEAD
   String get dateRangePickerHelpText => 'SELECTAȚI UN INTERVAL';
+=======
+  String get viewLicensesButtonLabel => 'परवाने पहा';
+}
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
 
   @override
   String get dateRangeStartDateSemanticLabelRaw => r'Data de începere: $fullDate';
@@ -38813,7 +38818,11 @@ class MaterialLocalizationTr extends GlobalMaterialLocalizations {
   String get reorderItemDown => 'Aşağı taşı';
 
   @override
+<<<<<<< HEAD
   String get reorderItemLeft => 'Sola taşı';
+=======
+  String get signedInLabel => 'సైన్ ఇన్ చేశారు';
+>>>>>>> 1fea41a66cd053af8fdafc14fd7fe6039449d83b
 
   @override
   String get reorderItemRight => 'Sağa taşı';
